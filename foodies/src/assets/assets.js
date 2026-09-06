@@ -11,7 +11,7 @@ import rolls from './rolls.jpg'
 import pizza from './pizza.jpg'
 import signIn from './signInBg.jpg'
 import signUp from './signUpBg.jpg'
-import userIcon from './userIcon.png'
+import userIcon from './usericon.png'
 import parcels from './parcels.png'
 
 export const assets = {
