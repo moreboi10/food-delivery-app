@@ -158,13 +158,20 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers(
-                        "/api/register",
-                        "/api/login",
-                        "/api/foods/**",
-                        "/api/orders/all",
-                        "/api/orders/status/**"
-                ).permitAll().anyRequest().authenticated())
+               .authorizeHttpRequests(auth -> auth
+        .requestMatchers(
+                "/api/register",
+                "/api/login",
+                "/api/foods/**",
+                "/api/orders/all",
+                "/api/orders/status/**"
+        ).permitAll()
+        .requestMatchers(
+                org.springframework.http.HttpMethod.OPTIONS,
+                "/**"
+        ).permitAll()
+        .anyRequest().authenticated()
+)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
