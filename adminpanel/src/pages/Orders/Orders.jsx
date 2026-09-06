@@ -7,12 +7,12 @@ const Orders = () => {
   const [data,setData] = useState([]);
 
   const fetchOrders = async () =>{
-   const response = await axios.get("http://localhost:8080/api/orders/all");
+   const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/orders/all`);
     setData(response.data);
   };
 
   const updateStatus = async (event,orderId) =>{
-    const response = await axios.patch(`http://localhost:8080/api/orders/status/${orderId}?status=${event.target.value}`);
+    const response = await axios.patch(`${import.meta.env.VITE_API_URL}/api/orders/status/${orderId}?status=${event.target.value}`);
     if (response.status === 200) {
     await fetchOrders();
   }

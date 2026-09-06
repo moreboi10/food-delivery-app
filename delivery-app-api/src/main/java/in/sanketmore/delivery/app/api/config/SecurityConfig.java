@@ -1,6 +1,5 @@
 package in.sanketmore.delivery.app.api.config;
 
-
 import in.sanketmore.delivery.app.api.filters.JwtAuthenticateFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -41,13 +40,12 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth ->auth.requestMatchers(
+                .authorizeHttpRequests(auth -> auth.requestMatchers(
                         "/api/register",
                         "/api/login",
                         "/api/foods/**",
                         "/api/orders/all",
-                        "/api/orders/status/**"
-                ).permitAll().anyRequest().authenticated())
+                        "/api/orders/status/**").permitAll().anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticateFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -65,26 +63,26 @@ public class SecurityConfig {
         return new CorsFilter(corsConfigurationSource());
     }
 
-
-
     private UrlBasedCorsConfigurationSource corsConfigurationSource() {
-            CorsConfiguration config = new CorsConfiguration();
-            config.setAllowedOrigins(List.of("http://localhost:5173","http://localhost:5174"));
-            config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS","PATCH"));
-            config.setAllowedHeaders(List.of("Authorization","Cache-Control","Content-Type"));
-            config.setAllowCredentials(true);
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:5174"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+        config.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+        config.setAllowCredentials(true);
 
-            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**", config);
-            return source;
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
 
-        }
+    }
 
-        @Bean
-        public AuthenticationManager authenticationManager() {
-            DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-            authenticationProvider.setUserDetailsService(userDetailsService);
-            authenticationProvider.setPasswordEncoder(passwordEncoder());
-            return new ProviderManager(authenticationProvider);
-        }
+   
+
+    @Bean
+    public AuthenticationManager authenticationManager() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return new ProviderManager(authenticationProvider);
+    }
 }
