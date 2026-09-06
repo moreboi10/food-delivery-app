@@ -84,9 +84,10 @@ const PlaceOrder = () => {
       razorpay_signature: razorpayResponse.razorpay_signature,
     };
 
+    // "http://localhost:8080/api/orders/verify",
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/orders/verify",
+        `${import.meta.env.VITE_API_URL}/api/orders/verify`,
         paymentData,
         {
           headers: {
@@ -109,10 +110,11 @@ const PlaceOrder = () => {
     }
   };
 
+  // "http://localhost:8080/api/orders/" + orderId,
   const deleteOrder = async (orderId) => {
     try {
       await axios.delete(
-        "http://localhost:8080/api/orders/" + orderId,
+        `${import.meta.env.VITE_API_URL}/api/orders/`+orderId,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -125,10 +127,11 @@ const PlaceOrder = () => {
     }
   };
 
+  // "http://localhost:8080/api/cart",
   const clearCart = async () => {
     try {
       await axios.delete(
-        "http://localhost:8080/api/cart",
+        `${import.meta.env.VITE_API_URL}/api/cart`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -166,9 +169,10 @@ const PlaceOrder = () => {
       orderStatus: "Preparing",
     };
 
+    // "http://localhost:8080/api/orders/create",
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/orders/create",
+        `${import.meta.env.VITE_API_URL}/api/orders/create`,
         orderData,
         {
           headers: {
