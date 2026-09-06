@@ -193,8 +193,8 @@ public class SecurityConfig {
         config.setAllowedOrigins(List.of(
                 "http://localhost:5173",
                 "http://localhost:5174",
-                "https://foodies-88wyyjlbd-sanket-more.vercel.app",
-                "https://foodies-adminpanel-cwag1o9ha-sanket-more.vercel.app"
+                "https://foodies-one-bay.vercel.app",
+                "https://foodies-adminpanel-xi.vercel.app"
         ));
 
         config.setAllowedMethods(List.of(
